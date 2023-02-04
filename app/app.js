@@ -4,10 +4,13 @@ const mysql = require('mysql2');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-app.use(cors());
-app.use(express.json());
+
+require('dotenv').config();
 
 const app = express();
+
+app.use(cors());
+app.use(express.json());
 
 const mysqlConfig = {
     host: process.env.MYSQL_HOST,

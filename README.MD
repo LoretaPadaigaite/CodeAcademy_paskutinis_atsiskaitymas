@@ -1,5 +1,9 @@
 # Events organizer
 
+Šis projektas skirtas vartotojui, kuris susikūria paskirą ir prisijungia susivesti renginyje dalyvaujančių asmenų kontaktinę informaciją.
+
+Norint, kad programa veiktų, reikia:
+
 ## BE instructions
 1) Run `npm install`
 2) Fill in `.env` variables

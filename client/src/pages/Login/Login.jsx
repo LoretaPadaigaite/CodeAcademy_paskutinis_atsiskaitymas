@@ -1,11 +1,13 @@
-import { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { Button } from "../../components/Button/Button";
 import { Form } from "../../components/Form/Form";
 import { Input } from "../../components/Input/Input";
+import { LOCAL_STORAGE_JWT_TOKEN_KEY } from "../../constants/constants";
+import { UserContext } from "../../contexts/UserContextWrapper";
 
-const RegisterContainer = styled.div`
+const LoginContainer = styled.div`
     align-items: center;
     background-color: lightgrey;
     display: flex;
@@ -28,28 +30,30 @@ const ErrorStyled = styled.div`
     text-align: center;
 `;
 
-export const Register = () => {
-    const navigate = useNavigate();
+export const Login = () => {
     const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const { setUser } = useContext(UserContext);
+    const navigate = useNavigate();
 
-    const handleRegister = () => {
+    const handleLogin = () => {
         setIsLoading(true);
 
-        fetch(`${process.env.REACT_APP_API_URL}/register`, {
+        fetch(`${process.env.REACT_APP_API_URL}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, name, surname, password })
+            body: JSON.stringify({
+                email, 
+                password
+            })
         })
         .then((res) => {
-            if (res.status === 400) {
-                throw new Error('User already exists');
+            if (res.status === 401) {
+                throw new Error('Incorrect username or password');
             }
 
             if (!res.ok) {
@@ -59,39 +63,28 @@ export const Register = () => {
             return res.json();
         })
         .then((data) => {
-            navigate('/login');
+            const { id, email, token } = data;
+            localStorage.setItem(LOCAL_STORAGE_JWT_TOKEN_KEY, token);
+            setUser({ id, email });
             setIsLoading(false);
             setError('');
+            navigate('/');
         })
         .catch((e) => {
             setError(e.message);
             setIsLoading(false);
         })
-    };
+    }
 
     return (
-        <RegisterContainer>
-            <FormStyled onSubmit={handleRegister} disabled={isLoading} column>
-                <h1>Register</h1>
-
+        <LoginContainer>
+            <FormStyled onSubmit={handleLogin} disabled={isLoading} column>
+                <h1>Expenses tracker</h1>
                 <Input 
-                    placeholder="El.paštas" 
+                    placeholder="El. paštas" 
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
                 />
-
-                <Input 
-                    placeholder="Vardas" 
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                />
-
-                <Input 
-                placeholder="Pavardė" 
-                onChange={(e) => setSurname(e.target.value)}
-                value={surname}
-            />
-
                 <Input 
                     placeholder="Slaptažodis" 
                     type="password"
@@ -99,9 +92,9 @@ export const Register = () => {
                     value={password}
                 />
                 {error && <ErrorStyled>{error}</ErrorStyled>}
-                <Button>Register</Button>
-                <LinkStyled to="/login">Login</LinkStyled>
+                <Button>Prisijungti</Button>
+                <LinkStyled to="/register">Registruotis</LinkStyled>
             </FormStyled>
-        </RegisterContainer>
+        </LoginContainer>
     );
 }
