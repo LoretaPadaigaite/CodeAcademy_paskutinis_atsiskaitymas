@@ -90,7 +90,6 @@ app.post('/register', (req, res) => {
             if (err?.code === 'ER_DUP_ENTRY') {
                 res.sendStatus(400);
             }
-            
             res.send(result);
         }
     )

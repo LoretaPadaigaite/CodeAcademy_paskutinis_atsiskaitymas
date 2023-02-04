@@ -15,13 +15,13 @@ export const PageLayout = () => {
     const navigate = useNavigate()
 
     if (!user) {
-        return <Navigate to="/login" />
+        return <Navigate to="/home" />
     }
 
     const handleLogOut = () => {
         localStorage.removeItem(LOCAL_STORAGE_JWT_TOKEN_KEY);
         setUser(null);
-        navigate('/login');
+        navigate('/home');
     }
 
     return (

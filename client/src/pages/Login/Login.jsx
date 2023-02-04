@@ -3,26 +3,41 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../../components/Button/Button";
 import { Form } from "../../components/Form/Form";
+import { HeaderSlog } from "../../components/HeaderSlogan/HeaderSlogan";
 import { Input } from "../../components/Input/Input";
 import { LOCAL_STORAGE_JWT_TOKEN_KEY } from "../../constants/constants";
 import { UserContext } from "../../contexts/UserContextWrapper";
+import PageImgSrc from '../../images/pageimg.jpg';
+
+const PageImg = styled.div`
+    background-image: url(${PageImgSrc});
+    background-size: cover;
+`;
 
 const LoginContainer = styled.div`
     align-items: center;
-    background-color: lightgrey;
+    align-items: baseline;
     display: flex;
     justify-content: center;
     height: 100vh;
+    padding: 1vh;
 `;
 
 const LinkStyled = styled(Link)`
     align-self: center;
+    color: black;
+    text-decoration: none;
+`;
+
+const FormStyledHeader = styled.h1`
+    text-align: center
 `;
 
 const FormStyled = styled(Form)`
     max-width: 100%;
     padding: 20px;
     width: 400px;
+    opacity: 0.8;
 `;
 
 const ErrorStyled = styled.div`
@@ -77,24 +92,27 @@ export const Login = () => {
     }
 
     return (
-        <LoginContainer>
-            <FormStyled onSubmit={handleLogin} disabled={isLoading} column>
-                <h1>Expenses tracker</h1>
-                <Input 
-                    placeholder="El. paštas" 
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                />
-                <Input 
-                    placeholder="Slaptažodis" 
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                />
-                {error && <ErrorStyled>{error}</ErrorStyled>}
-                <Button>Prisijungti</Button>
-                <LinkStyled to="/register">Registruotis</LinkStyled>
-            </FormStyled>
-        </LoginContainer>
+        <PageImg>
+            <HeaderSlog />
+            <LoginContainer>
+                <FormStyled onSubmit={handleLogin} disabled={isLoading} column>
+                    <FormStyledHeader>Prisijungti</FormStyledHeader>
+                    <Input 
+                        placeholder="El. paštas" 
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                    />
+                    <Input 
+                        placeholder="Slaptažodis" 
+                        type="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                    />
+                    {error && <ErrorStyled>{error}</ErrorStyled>}
+                    <Button>Prisijungti</Button>
+                    <LinkStyled to="/register">Registruotis</LinkStyled>
+                </FormStyled>
+            </LoginContainer>   
+        </PageImg>
     );
 }
