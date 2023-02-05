@@ -48,16 +48,23 @@ app.get('/participants', verifyToken, (req, res) => {
 
 
 app.post('/participants', verifyToken, (req, res) => {
-    const user = getUserFromToken(req);
-    
-    connection.execute
-    ('INSERT INTO participants (name, surname, email, telephone) VALUES (?, ?, ?, ?)', 
-    [user.id],
-    (err, participants) => {
-        res.send(participants);
-    });
+    const { name, surname, email, telephone } = req.body;
+    const { id } = getUserFromToken(req);
 
-})
+    connection.execute(
+        'INSERT INTO participants (name, surname, email, telephone, userId) VALUES (?. ?. ?, ?, ?)',
+        [name, surname, email, telephone, userId],
+        () => {
+            connection.execute(
+                'SELECT * FROM participants WHERE userId=?', 
+                [id], 
+                (err, participants) => {
+                    res.send(participants);
+                }
+            )
+        }
+    )
+});
  
 
 app.delete('/participants/:id', verifyToken, (req, res) => {

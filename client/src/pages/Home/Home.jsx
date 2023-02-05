@@ -29,7 +29,7 @@ export const HomePage = () =>{
                 <LinkStyle to='/register'>Registruotis</LinkStyle>
                 </div>
                 <div>
-                <LinkStyle to='/login'>Prisijugti</LinkStyle>
+                <LinkStyle to='/login'>Prisijungti</LinkStyle>
                 </div>
             </NavigateLink>
         </PageImg>

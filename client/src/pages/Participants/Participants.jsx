@@ -5,12 +5,23 @@ import { Form } from "../../components/Form/Form";
 import { Input } from "../../components/Input/Input";
 import { UserContext } from '../../contexts/UserContextWrapper';
 import { LOCAL_STORAGE_JWT_TOKEN_KEY } from '../../constants/constants';
+/*import PageImgSrc from '../../images/pageimg.jpg';
+
+const PageImg = styled.div`
+    background-image: url(${PageImgSrc});
+    height: 100vh;
+    opacity: 0.4;
+`;*/
+
 
 const ParticipantsList = styled.ul`
     display: flex;
     flex-direction: column;
     gap: 8px;
-    list-style: none;
+   // list-style: decimal;
+`;
+
+const ParticipantInfoItems = styled.div`
 `;
 
 const HoverOverlay = styled.div`
@@ -32,8 +43,7 @@ const HoverOverlayContent = styled.div`
 
 const ParticipantsListItem = styled.li`
     align-items: center;
-    border-radius: 10px;
-    box-shadow: 0 5px 7px -1px rgb(51 51 51 / 23%);
+    border: solid 1px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -49,30 +59,16 @@ const ParticipantsListItem = styled.li`
         }
     }
 `;
-
-const ParticipantName = styled.span`
-    color: #979cb0;
+const TableName = styled.h1`
+    text-align: center;
+`;
+const ParticipantInfo = styled.span`
+    color: black;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 400;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-`;
-
-const ParticipantEmail = styled.span`
-    color: #35d8ac;
-    font-size: 34px;
-    font-weight: 700;
-`;
-const ParticipantSurname = styled.span`
-    color: #35d8ac;
-    font-size: 34px;
-    font-weight: 700;
-`;
-const ParticipantTelephone = styled.span`
-    color: #35d8ac;
-    font-size: 34px;
-    font-weight: 700;
 `;
 
 export const Participants = () => {
@@ -146,6 +142,7 @@ export const Participants = () => {
         }
     }
 
+
     return (
         <ParticipantsList>
             <Form onSubmit={handleParticipantAdd}>
@@ -180,17 +177,25 @@ export const Participants = () => {
 
                 <Button>Pridėti dalyvį</Button>
             </Form>
+
+            <TableName>Dalyvių sąrašas</TableName>
+
+            <ParticipantInfoItems>
+
             {participants.map((exp) => (
                 <ParticipantsListItem key={exp.id} onClick={() => handleDeleteParticipant(exp.id)}>
                     <HoverOverlay>
                         <HoverOverlayContent>IŠTRINTI</HoverOverlayContent>
                     </HoverOverlay>
-                    <ParticipantName>{exp.name}</ParticipantName>
-                    <ParticipantSurname>{exp.surname}</ParticipantSurname>
-                    <ParticipantEmail>{exp.email}</ParticipantEmail>
-                    <ParticipantTelephone>{exp.telephone}</ParticipantTelephone>
+
+                    <ParticipantInfo>{exp.name}</ParticipantInfo>
+                    <ParticipantInfo>{exp.surname}</ParticipantInfo>
+                    <ParticipantInfo>{exp.email}</ParticipantInfo>
+                    <ParticipantInfo>{exp.telephone}</ParticipantInfo>
                 </ParticipantsListItem>
             ))}
+            </ParticipantInfoItems>
+
         </ParticipantsList>
     );
 }
