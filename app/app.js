@@ -52,8 +52,8 @@ app.post('/participants', verifyToken, (req, res) => {
     const { id } = getUserFromToken(req);
 
     connection.execute(
-        'INSERT INTO participants (name, surname, email, telephone, userId) VALUES (?. ?. ?, ?, ?)',
-        [name, surname, email, telephone, userId],
+        'INSERT INTO participants (name, surname, email, telephone, userId) VALUES (?, ?, ?, ?, ?)',
+        [name, surname, email, telephone, id],
         () => {
             connection.execute(
                 'SELECT * FROM participants WHERE userId=?', 

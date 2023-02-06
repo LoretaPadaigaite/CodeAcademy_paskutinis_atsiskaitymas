@@ -71,6 +71,10 @@ const ParticipantInfo = styled.span`
     overflow: hidden;
 `;
 
+const Table = styled.table`
+    width: 100%;
+`;
+
 export const Participants = () => {
     const [participants, setParticipants] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -179,6 +183,21 @@ export const Participants = () => {
             </Form>
 
             <TableName>Dalyvių sąrašas</TableName>
+            
+            <Table>
+            <tr>
+                    <th>Vardas</th>
+                    <th>Pavardė</th>
+                    <th>El. paštas</th>
+                    <th>Telefono numeris</th>
+                    <th></th>
+            </tr>
+            <tr>
+                <th></th>            
+            </tr>
+
+            </Table>
+
 
             <ParticipantInfoItems>
 
@@ -188,10 +207,14 @@ export const Participants = () => {
                         <HoverOverlayContent>IŠTRINTI</HoverOverlayContent>
                     </HoverOverlay>
 
+
+
+
                     <ParticipantInfo>{exp.name}</ParticipantInfo>
                     <ParticipantInfo>{exp.surname}</ParticipantInfo>
                     <ParticipantInfo>{exp.email}</ParticipantInfo>
                     <ParticipantInfo>{exp.telephone}</ParticipantInfo>
+                    <ParticipantInfo>+</ParticipantInfo>
                 </ParticipantsListItem>
             ))}
             </ParticipantInfoItems>
