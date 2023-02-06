@@ -5,6 +5,15 @@ import { Form } from "../../components/Form/Form";
 import { Input } from "../../components/Input/Input";
 import { UserContext } from '../../contexts/UserContextWrapper';
 import { LOCAL_STORAGE_JWT_TOKEN_KEY } from '../../constants/constants';
+import { BsTrash  } from 'react-icons/bs';
+
+const sizeValueforIcon = 10 *3;
+
+const IconButton = styled.button`
+    border: none;
+    background-color: transparent;
+`;
+
 /*import PageImgSrc from '../../images/pageimg.jpg';
 
 const PageImg = styled.div`
@@ -207,14 +216,14 @@ export const Participants = () => {
                         <HoverOverlayContent>IŠTRINTI</HoverOverlayContent>
                     </HoverOverlay>
 
-
-
-
                     <ParticipantInfo>{exp.name}</ParticipantInfo>
                     <ParticipantInfo>{exp.surname}</ParticipantInfo>
                     <ParticipantInfo>{exp.email}</ParticipantInfo>
                     <ParticipantInfo>{exp.telephone}</ParticipantInfo>
-                    <ParticipantInfo>+</ParticipantInfo>
+                    <IconButton>
+                    <BsTrash size={sizeValueforIcon} />
+                    </IconButton>
+
                 </ParticipantsListItem>
             ))}
             </ParticipantInfoItems>
