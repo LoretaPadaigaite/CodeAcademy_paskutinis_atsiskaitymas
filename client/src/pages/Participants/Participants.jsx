@@ -12,65 +12,34 @@ const sizeValueforIcon = 10 *3;
 const IconButton = styled.button`
     border: none;
     background-color: transparent;
+    cursor: pointer;
 `;
-
-/*import PageImgSrc from '../../images/pageimg.jpg';
-
-const PageImg = styled.div`
-    background-image: url(${PageImgSrc});
-    height: 100vh;
-    opacity: 0.4;
-`;*/
-
 
 const ParticipantsList = styled.ul`
     display: flex;
     flex-direction: column;
-    gap: 8px;
-   // list-style: decimal;
-`;
-
-const ParticipantInfoItems = styled.div`
-`;
-
-const HoverOverlay = styled.div`
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    content: '';
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    left: 0;
-    position: absolute;
-    width: 100%;
-`;
-
-const HoverOverlayContent = styled.div`
-    color: red;
-    font-size: 16px;
 `;
 
 const ParticipantsListItem = styled.li`
     align-items: center;
     border: solid 1px;
-    cursor: pointer;
     display: flex;
     justify-content: space-between;
     overflow: hidden;
     padding: 10px 30px;
     position: relative;
-    ${HoverOverlay} {
-        visibility: hidden;
-    }
-    &:hover {
-        ${HoverOverlay} {
-            visibility: visible;
-        }
-    }
 `;
+
+const Table = styled.table`
+    width: 100%;  
+    padding: 8px;
+`;
+
 const TableName = styled.h1`
     text-align: center;
+    padding: 14px;
 `;
+
 const ParticipantInfo = styled.span`
     color: black;
     font-size: 20px;
@@ -80,9 +49,7 @@ const ParticipantInfo = styled.span`
     overflow: hidden;
 `;
 
-const Table = styled.table`
-    width: 100%;
-`;
+
 
 export const Participants = () => {
     const [participants, setParticipants] = useState([]);
@@ -194,39 +161,30 @@ export const Participants = () => {
             <TableName>Dalyvių sąrašas</TableName>
             
             <Table>
-            <tr>
-                    <th>Vardas</th>
-                    <th>Pavardė</th>
-                    <th>El. paštas</th>
-                    <th>Telefono numeris</th>
-                    <th></th>
-            </tr>
-            <tr>
-                <th></th>            
-            </tr>
-
+                <tr>
+                        <th>Vardas</th>
+                        <th>Pavardė</th>
+                        <th>El. paštas</th>
+                        <th>Telelefono numeris</th>
+                        <th></th>
+                </tr>
             </Table>
 
 
-            <ParticipantInfoItems>
-
             {participants.map((exp) => (
-                <ParticipantsListItem key={exp.id} onClick={() => handleDeleteParticipant(exp.id)}>
-                    <HoverOverlay>
-                        <HoverOverlayContent>IŠTRINTI</HoverOverlayContent>
-                    </HoverOverlay>
-
+                <ParticipantsListItem>
                     <ParticipantInfo>{exp.name}</ParticipantInfo>
                     <ParticipantInfo>{exp.surname}</ParticipantInfo>
                     <ParticipantInfo>{exp.email}</ParticipantInfo>
                     <ParticipantInfo>{exp.telephone}</ParticipantInfo>
-                    <IconButton>
+                    
+                    <IconButton  key={exp.id} onClick={() => handleDeleteParticipant(exp.id)}>
                     <BsTrash size={sizeValueforIcon} />
                     </IconButton>
 
                 </ParticipantsListItem>
             ))}
-            </ParticipantInfoItems>
+
 
         </ParticipantsList>
     );
