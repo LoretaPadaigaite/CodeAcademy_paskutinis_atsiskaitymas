@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import notFoundImageSrc from '../../images/pagenotfoundimg.jpg'
+import notFoundImageSrc from '../../images/pagenotfoundimg.jpg';
+import { FaHome  } from 'react-icons/fa';
+
+
+const sizeValueforIcon = 12 * 4;
+
+const IconSpan = styled.span`
+    padding: 10px;
+`;
 
 const NotFoundStyled = styled.div`
     align-items: center;
@@ -33,7 +41,11 @@ export const NotFound = () => {
         <NotFoundStyled>
                 <PageNotFoundImage src={notFoundImageSrc} />
                 <PageNotFoundHeader>Page not found...</PageNotFoundHeader>
-                <PageNotFoundLink to="/">Atsiprašome. Eikite į pradinį puslapį.</PageNotFoundLink>
+                <PageNotFoundLink to="/">Atsiprašome. Eikite į pradinį puslapį.
+                <IconSpan>
+                        <FaHome size={sizeValueforIcon} />
+                    </IconSpan>
+                </PageNotFoundLink>
 
 
 

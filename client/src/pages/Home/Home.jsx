@@ -2,6 +2,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { HeaderSlog } from '../../components/HeaderSlogan/HeaderSlogan';
 import PageImgSrc from '../../images/pageimg.jpg';
+import { BsPencilSquare  } from 'react-icons/bs';
+
+
+const sizeValueforIcon = 10 * 4;
+
+const IconSpan = styled.span`
+    padding: 10px;
+`;
 
 const PageImg = styled.div`
     background-image: url(${PageImgSrc});
@@ -26,10 +34,20 @@ export const HomePage = () =>{
             <HeaderSlog/>
             <NavigateLink>
                 <div>
-                <LinkStyle to='/register'>Registruotis</LinkStyle>
+                <LinkStyle to='/register'>
+                    Registruotis
+                    <IconSpan>
+                        <BsPencilSquare size={sizeValueforIcon} />
+                    </IconSpan>
+                </LinkStyle>
                 </div>
                 <div>
-                <LinkStyle to='/login'>Prisijungti</LinkStyle>
+                <LinkStyle to='/login'>
+                    Prisijungti
+                    <IconSpan>
+                        <BsPencilSquare size={sizeValueforIcon} />
+                    </IconSpan> 
+                </LinkStyle>
                 </div>
             </NavigateLink>
         </PageImg>

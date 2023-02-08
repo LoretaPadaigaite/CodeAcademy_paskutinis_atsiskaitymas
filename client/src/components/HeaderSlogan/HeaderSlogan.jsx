@@ -10,9 +10,7 @@ const HeaderSlogan = styled.h1`
 `;
 
 const Logo = styled.img`
-    width: 15vh;
-    height: 15vh;
-
+    width: 12vh;
 `;
 
 const Header = styled.div`
